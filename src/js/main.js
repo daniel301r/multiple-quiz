@@ -1,68 +1,62 @@
-import { quizQuestions} from './quizQuestions';
 import { DOMstrings } from './view';
+import { createQuiz, readyQuiz } from './model';
 import * as model from './model';
 import * as view from './view';
 
-// set up state function to change questions etc.
+// why is this able to be const when it is updating and changing as 
+// I do things in the app
+export const data = {}
 
-export let state = {
-    questionNumber: 0,
-    question: quizQuestions[0].question,
-    answerOptions: quizQuestions[0].answers,
-    overallScore: quizQuestions.length * 3,
-    points: 0,
-    name: '',
-    stage: 'input'
+const getQuizQuestions = async () => {
+    // get the inputs from the user
+    const query = model.getUserInput();
+    // create new quiz
+    if(query) {
+        data.newQuiz = new createQuiz(query.name, query.amount, query.category, query.difficulty);
+        data.newQuiz.createFetchRequest();
+        await data.newQuiz.getQuiz();
+    }
+    // I had to call this function here because it was loading before the promise had returned
+    // in my submitName function below
+    setupQuiz();
 }
 
-function submitName(e) {
-    // I added this to prevent page refresh - it kept going back to input page
+function setupQuiz() {
+    // create the playing quiz class to handle events etc during play
+    data.quizInPlay = new readyQuiz(data.newQuiz.results, data.newQuiz.amount);
+    data.quizInPlay.setQuestion();
+}
+
+function playQuiz(e) {
     e.preventDefault();
-    // store name in data then display it in header
-    model.getName();
-    // close input page and move to quiz (I deleted the clear html)
+    // close input page and move to quiz
     view.closeInputForm();
     
+    getQuizQuestions(); // this is the function that I have to wait for
+    view.setupRender();
+    // because I had to wait for the promise to return
+    setTimeout(model.setupQuestionBoard, 2000);
+    setTimeout(view.closeRender, 2000);
 
-    // display header
-    view.displayHeader();
-    model.updateHeader();
-    // questions
-    view.displayQuestion();
-    model.setQuestion();
-    // answers
-    view.displayAnswers();
-    model.setAnswers();
-    // resetBTN
-    view.displayResetBtn();
-
-    state.stage = 'questions'
-    console.log(state.question);
+    // it is closing 
 }
 
-// set up event listeners to get name onto question page
+// set up event listeners to get name onto question page and 
 DOMstrings.container.addEventListener('click', function(e){
     if (e.target.matches('.submitName')) {
-        submitName(e);
+        playQuiz(e);
     }
 });
 
-/* 
 
-select answers
-
-reset button
-
-*/
-
-// ------- I have added the points the from the object with quiz questions but probably better
-// adding in a data-set rather than passing it in as the id?
-
+// ------- I added the content of the correct answer as the id so that I can check it against e.target.id
+// -------- is it better to pass it in as a data attribute?
 function selectAnswer(e) {
-    state.points += Number(e.target.id);
-    model.updateHeader();
-    model.nextQuestion();
-
+    // check to see if the answer matches the correct one
+    if (e.target.id === data.quizInPlay.correctAnswer){
+        data.quizInPlay.points++
+    } 
+    data.quizInPlay.nextQuestion();
 }
 
 DOMstrings.container.addEventListener('click', function(e){
@@ -74,39 +68,19 @@ DOMstrings.container.addEventListener('click', function(e){
 
 
 function resetQuiz() {
-    if (state.stage === 'result') {
-        const name = state.name;
-        state = {
-            questionNumber: 0,
-            question: quizQuestions[0].question,
-            answerOptions: quizQuestions[0].answers,
-            overallScore: quizQuestions.length * 3,
-            points: 0,
-            name: name
-        }
-        // make the results page hidden and then make the others appear
+    if (data.quizInPlay.stage === 'result') {
         DOMstrings.resultsPage.style.display = 'none';
-
-        model.updateHeader();
-        view.displayQuestion();
-        model.setAnswers();
-    } else {
-        const name = state.name;
-        state = {
-            questionNumber: 0,
-            question: quizQuestions[0].question,
-            answerOptions: quizQuestions[0].answers,
-            overallScore: quizQuestions.length * 3,
-            points: 0,
-            name: name
-        }
         view.clearHTML('.answerOptions');
-        model.updateHeader();
-        view.displayQuestion();
-        model.setAnswers();
+        data.quizInPlay.setQuestion();
+        model.setupQuestionBoard();
+    } else {
+        view.clearHTML('.answerOptions');
+        data.quizInPlay.setQuestion();
+        data.quizInPlay.updateHeader();
+        data.quizInPlay.updateQuestion();
+        data.quizInPlay.updateAnswers();
     }
 }
-
 document.body.addEventListener('click', function(e){
     if(e.target.matches('.resetBtn')){
         resetQuiz();

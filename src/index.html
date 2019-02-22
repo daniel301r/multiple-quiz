@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Multiple Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
     
 </head>
@@ -15,6 +16,27 @@
         <form class="inputForm">
             <label for="name">What is your name?</label>
             <input type="text" id="name" placeholder="Your name....">
+            
+            <label for="amount">Number of Questions:</label>
+            <input type="text" id="amount" placeholder="10" min="1" max="50">
+
+            <label for="categories">Select Category:</label>
+            <select id="categories">
+                <option value="">-- Any category --</option>
+            </select>  
+
+            <div class="loader">
+                <i class="fas fa-spinner"></i>
+            </div>
+
+            <label for="difficulty" >Select Difficulty:</label>
+            <select id="difficulty">
+                <option value="">-- Any difficulty --</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            
             <button class="submitName">Enter</button>
         </form>
                    
@@ -37,8 +59,10 @@
 
 
         <div class="resultsPage">
+            <!--
             <h1>Your result is: <span class="resultScore">35</span></h1>
             <p>This means that <span class="resultCaption">you are a very crazy person</span></p>
+            -->
         </div> 
     
 
