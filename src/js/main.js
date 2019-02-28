@@ -3,43 +3,30 @@ import { createQuiz, readyQuiz } from './model';
 import * as model from './model';
 import * as view from './view';
 
-// why is this able to be const when it is updating and changing as 
-// I do things in the app
-export const data = {}
+export let data = {}
 
-const getQuizQuestions = async () => {
+const playQuiz = async (e) => {
+    e.preventDefault();
     // get the inputs from the user
     const query = model.getUserInput();
+    
     // create new quiz
     if(query) {
+        // close input page and move to quiz
+        view.toggleInputForm();
+        view.renderLoader();
+
         data.newQuiz = new createQuiz(query.name, query.amount, query.category, query.difficulty);
         data.newQuiz.createFetchRequest();
         await data.newQuiz.getQuiz();
+        view.clearLoader();
     }
-    // I had to call this function here because it was loading before the promise had returned
-    // in my submitName function below
-    setupQuiz();
-}
 
-function setupQuiz() {
-    // create the playing quiz class to handle events etc during play
     data.quizInPlay = new readyQuiz(data.newQuiz.results, data.newQuiz.amount);
     data.quizInPlay.setQuestion();
+    model.setupQuestionBoard();
 }
 
-function playQuiz(e) {
-    e.preventDefault();
-    // close input page and move to quiz
-    view.closeInputForm();
-    
-    getQuizQuestions(); // this is the function that I have to wait for
-    view.setupRender();
-    // because I had to wait for the promise to return
-    setTimeout(model.setupQuestionBoard, 2000);
-    setTimeout(view.closeRender, 2000);
-
-    // it is closing 
-}
 
 // set up event listeners to get name onto question page and 
 DOMstrings.container.addEventListener('click', function(e){
@@ -82,8 +69,26 @@ function resetQuiz() {
     }
 }
 document.body.addEventListener('click', function(e){
-    if(e.target.matches('.resetBtn')){
+    if(e.target.matches('.startQuizAgain')){
         resetQuiz();
+    }
+});
+
+
+function newQuiz() {
+    view.removeQandA();
+
+    // remove btns
+    view.toggleBtns();
+    // add input form
+    view.toggleInputForm();
+    // clear data from data
+    data = {};
+}
+
+document.body.addEventListener('click', function(e){
+    if(e.target.matches('.newQuiz')){
+        newQuiz();
     }
 });
 

@@ -146,7 +146,7 @@ export function setupQuestionBoard() {
     view.setupAnswers();
     data.quizInPlay.updateAnswers(); // really this should be on the class and I should make a better function
     // resetBTN
-    view.setupResetBtn();
+    view.toggleBtns();
 }
 
 

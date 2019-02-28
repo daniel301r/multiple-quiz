@@ -1,5 +1,6 @@
 import { data } from './main'; 
 
+
 export const DOMstrings = {
     question: document.querySelector('.question'),
     answerOptions: document.querySelector('.answerOptions'),
@@ -9,7 +10,8 @@ export const DOMstrings = {
     displayScore: document.querySelector('.displayScore'),
     inputForm: document.querySelector('.inputForm'),
     header: document.querySelector('.header'),
-    resetBtn: document.querySelector('.resetBtn'),
+    resetBtn: document.querySelector('.startQuizAgain'),
+    newQuiz: document.querySelector('.newQuiz'),
     resultsPage: document.querySelector('.resultsPage'),
     categoryList: document.getElementById('categories'),
     questionAmount: document.getElementById('amount'),
@@ -17,18 +19,16 @@ export const DOMstrings = {
     category: document.getElementById('categories'),
     loader: document.querySelector('.loader'),
     loaderSpinner: document.querySelector('.loader i'),
+    buttonDiv: document.querySelector('.resetBtns'),
+
 }
 
-export function closeInputForm() {
-    DOMstrings.inputForm.style.display = 'none';
-}
-export function closeRender() {
-    DOMstrings.loader.style.display = 'none';
-    DOMstrings.loaderSpinner.style.display = 'none';
-}
-export function setupRender() {
-    DOMstrings.loader.style.display = 'block';
-    DOMstrings.loaderSpinner.style.display = 'block';
+export function toggleInputForm() {
+    if (DOMstrings.inputForm.style.display === 'none'){
+        DOMstrings.inputForm.style.display = 'flex';
+    } else {
+        DOMstrings.inputForm.style.display = 'none';
+    }   
 }
 export function setupQuestion() {
     DOMstrings.question.style.display = 'block';
@@ -36,8 +36,13 @@ export function setupQuestion() {
 export function setupAnswers() {
     DOMstrings.answerOptions.style.display = 'block';
 }
-export function setupResetBtn() {
-    DOMstrings.resetBtn.style.display = 'block';
+export function toggleBtns() {
+    if (DOMstrings.buttonDiv.style.display === 'flex'){
+        DOMstrings.buttonDiv.style.display = 'none';
+    } else {
+        DOMstrings.buttonDiv.style.display = 'flex';
+    }
+    
 }
 export function setupHeader() {
     // change display setting to show elements
@@ -45,12 +50,17 @@ export function setupHeader() {
     DOMstrings.questionNumber.style.display = 'block';
     DOMstrings.displayScore.style.display = 'block';
 }
-export function displayResult() {
+
+export function removeQandA() {
     DOMstrings.question.style.display = 'none';
     DOMstrings.answerOptions.style.display = 'none';
     DOMstrings.header.style.display = 'none';
     DOMstrings.questionNumber.style.display = 'none';
     DOMstrings.displayScore.style.display = 'none';
+}
+
+export function displayResult() {
+    removeQandA();
     
     DOMstrings.resultsPage.style.display = 'block';
     
@@ -117,6 +127,20 @@ export function clearHTML(node) {
     while (thingToDelete.firstChild) {
         thingToDelete.removeChild(thingToDelete.firstChild);
     }
+}
+
+export function renderLoader() {
+    const loader = `
+        <div class="loader">
+            <i class="fas fa-spinner"></i>
+        </div>
+    `;
+    DOMstrings.container.insertAdjacentHTML('afterbegin', loader);
+}
+
+export function clearLoader() {
+    const loader = document.querySelector('.loader');
+    if (loader) loader.parentElement.removeChild(loader);
 }
 
 
