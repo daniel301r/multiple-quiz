@@ -11,6 +11,7 @@
   "author": "daniel",
   "license": "ISC",
   "dependencies": {
+    "particlesjs": "^2.2.3",
     "webpack-cli": "^3.2.3"
   },
   "devDependencies": {

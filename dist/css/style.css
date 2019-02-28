@@ -154,7 +154,7 @@ li {
 }
 
 li:hover{
-    width: 350px;
+    /* width: 350px; */
     background-color: blue;
     font-weight: bold;
     color: cornsilk;
@@ -205,7 +205,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: blue;
+    color: cornflowerblue;
     font-size: 5rem;
 } .loader i {
     animation: rotate 1.5s infinite linear; 

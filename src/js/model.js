@@ -5,8 +5,8 @@ import * as view from './view';
 
 
 export const getUserInput = () => {
-    // because I extract the value from option list, I need to find the ID of that option
-    // to enter it into the categories
+    // as the categories are identified using a number, the id in the object array in view.js, I need to get the 
+    // value of the category the user enters in the input form and then find the name of the category in the list 
     function getCategoryID(category) {
         if (category) {
             const element = view.categories.find(cur => cur.name === category);

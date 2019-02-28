@@ -76,8 +76,9 @@ document.body.addEventListener('click', function(e){
 
 
 function newQuiz() {
+    // remove questions and answers or results page
     view.removeQandA();
-
+    view.removeResultsPage();
     // remove btns
     view.toggleBtns();
     // add input form

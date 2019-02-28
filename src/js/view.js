@@ -59,6 +59,10 @@ export function removeQandA() {
     DOMstrings.displayScore.style.display = 'none';
 }
 
+export function removeResultsPage() {
+        DOMstrings.resultsPage.style.display = 'none';
+}
+
 export function displayResult() {
     removeQandA();
     
