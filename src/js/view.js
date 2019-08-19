@@ -20,7 +20,8 @@ export const DOMstrings = {
     loader: document.querySelector('.loader'),
     loaderSpinner: document.querySelector('.loader i'),
     buttonDiv: document.querySelector('.resetBtns'),
-
+    playerSelect: document.querySelector('.playerPage'),
+    twoPlayerForm: document.querySelector('.twoPlayerForm'),
 }
 
 export function toggleInputForm() {

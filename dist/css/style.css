@@ -178,7 +178,7 @@ p {
     width: 55%;
 }
 
-.startQuizAgain, .newQuiz {
+.btn {
     cursor: pointer;
     text-align: center;
     padding: 1rem;
@@ -192,12 +192,18 @@ p {
     opacity: 0.9;
 }
 
-.startQuizAgain:hover, .newQuiz:hover{
+.playerBtns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.btn:hover {
     transform: scale(1.05);
     transition: 0.1s;
 }
 
-.startQuizAgain:focus, .newQuiz:focus {
+.btn:focus {
     outline: none;
 }
 
@@ -219,3 +225,17 @@ p {
         transform: rotate(360deg);
     }
 }
+
+/* .twoPlayerForm {
+    display: none;
+}
+
+.twoPlayerInputForm{
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+}
+
+.twoPlayerInputForm > * {
+    margin: 0.5rem 0;
+} */

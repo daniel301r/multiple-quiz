@@ -5,8 +5,30 @@ import * as view from './view';
 
 export let data = {}
 
+// function selectPlayers(amount) {
+//     if (amount === '1') {
+//         data.players = 1; // don't know if I need to do this
+//         DOMstrings.playerSelect.style.display = 'none';
+//         DOMstrings.inputForm.style.display = 'flex';
+//     } else if (amount === '2') {
+//         // set up UI for two player select
+//         console.log('This is two player mode');
+//         DOMstrings.playerSelect.style.display = 'none';
+//         DOMstrings.twoPlayerForm.style.display = 'flex';  
+//     }
+// }
+
+// // I have a lot of event listeners on the container, should I put all of them in one event listener?
+// DOMstrings.container.addEventListener('click', function(e){
+//     if (e.target.id === '1' || '2') {
+//         selectPlayers(e.target.value);
+//     }
+// });
+
 const playQuiz = async (e) => {
+    
     e.preventDefault();
+    
     // get the inputs from the user
     const query = model.getUserInput();
     
@@ -21,7 +43,6 @@ const playQuiz = async (e) => {
         await data.newQuiz.getQuiz();
         view.clearLoader();
     }
-
     data.quizInPlay = new readyQuiz(data.newQuiz.results, data.newQuiz.amount);
     data.quizInPlay.setQuestion();
     model.setupQuestionBoard();
@@ -36,8 +57,6 @@ DOMstrings.container.addEventListener('click', function(e){
 });
 
 
-// ------- I added the content of the correct answer as the id so that I can check it against e.target.id
-// -------- is it better to pass it in as a data attribute?
 function selectAnswer(e) {
     // check to see if the answer matches the correct one
     if (e.target.id === data.quizInPlay.correctAnswer){

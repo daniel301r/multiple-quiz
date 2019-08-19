@@ -11,6 +11,14 @@
 </head>
 <body>
     <div class="container">
+
+        <!-- <section class="playerPage">
+            <h1>How many players?</h1>
+            <div class="playerBtns">
+                <button id="onePlayer" class="btn" value="1">1</button>
+                <button id="twoPlayers" class="btn" value="2">2</button>
+            </div>
+        </section> -->
           
         <!-- is it better to validate the form through the html or with js? -->
         <form class="inputForm">
@@ -35,7 +43,57 @@
             
             <button class="submitName">Enter</button>
         </form>
-                   
+
+        <!-- <div class="twoPlayerForm">    
+            <form class="twoPlayerInputForm">
+                <h3>Player 1</h3>
+                <label for="name">What is your name?</label>
+                <input type="text" id="name" placeholder="Your name....">
+                
+                <label for="amount">Number of Questions:</label>
+                <input type="text" id="amount" placeholder="10" min="1" max="50">
+    
+                <label for="categories">Select Category:</label>
+                <select id="categories">
+                    <option value="">-- Any category --</option>
+                </select>  
+    
+                <label for="difficulty" >Select Difficulty:</label>
+                <select id="difficulty">
+                    <option value="">-- Any difficulty --</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                
+                <button class="submitName">Enter</button>
+            </form>
+
+            <form class="twoPlayerInputForm">
+                    <h3>Player 2</h3>
+                    <label for="name">What is your name?</label>
+                    <input type="text" id="name" placeholder="Your name....">
+                    
+                    <label for="amount">Number of Questions:</label>
+                    <input type="text" id="amount" placeholder="10" min="1" max="50">
+        
+                    <label for="categories">Select Category:</label>
+                    <select id="categories">
+                        <option value="">-- Any category --</option>
+                    </select>  
+        
+                    <label for="difficulty" >Select Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="">-- Any difficulty --</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    
+                    <button class="submitName">Enter</button>
+                </form>
+        </div>  -->
+                
         <section class="header">
             <h3>Question <span class="questionNumber">1/10</span></h3>
             <h2><span class="name">Mayur</span>'s quiz</h2>
@@ -59,8 +117,8 @@
         </div> 
     </div>
     <div class="resetBtns">
-         <button class="newQuiz">New Quiz</button>
-        <button class="startQuizAgain">Start Quiz Again</button>
+         <button class="newQuiz btn">New Quiz</button>
+        <button class="startQuizAgain btn">Start Quiz Again</button>
     </div>
     
 

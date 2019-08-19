@@ -35,6 +35,7 @@ export class createQuiz {
 
     createFetchRequest(){
         let fetchRequest = '';
+        // change this to switch statement
         if (this.name === '') {
             console.log('Please enter a name...')
         } else if (this.amount === 0 && this.category === '' && this.difficulty === ''){
@@ -76,7 +77,7 @@ export class readyQuiz {
     // 1. get data from state
     setQuestion() {
         if(this.questions.response_code > 0) {
-            console.log('Try being less picky, or lower the amount of questions...');
+            console.log('Try being less selective, or lower the amount of questions...');
             return -1; // I don't know if this is the right way to stop a function from working
         }
         this.questionNumber = 0;
@@ -93,6 +94,8 @@ export class readyQuiz {
         this.correctAnswer = this.questions.results[this.questionNumber].correct_answer;
         this.category = this.questions.results[this.questionNumber].category;
         this.incorrectAnswers = this.questions.results[this.questionNumber].incorrect_answers;
+        // see if this is where you need to empty it ---- ?
+        this.answerOptions = [];
         this.answerOptions = [this.correctAnswer, ...this.incorrectAnswers];
     
     }
@@ -105,9 +108,9 @@ export class readyQuiz {
         DOMstrings.displayScore.innerHTML = `${this.points}/${this.totalQuestions}`;
     }
     updateQuestion() {
-            DOMstrings.question.innerHTML = this.currentQuestion;
+        DOMstrings.question.innerHTML = this.currentQuestion;
     }
-    updateAnswers() {  
+    updateAnswers() {
         let markup = '';
         const shuffledArray = shuffle(this.answerOptions);
         for (let cur of shuffledArray) {
@@ -116,6 +119,8 @@ export class readyQuiz {
             newHTML = newHTML.replace('%id%', cur)
             markup += newHTML;
         }
+        // recent addition because answer options weren't going after rest
+        view.clearHTML('.answerOptions');
         DOMstrings.answerOptions.insertAdjacentHTML('afterbegin', markup);
     }
     nextQuestion() {
@@ -133,6 +138,7 @@ export class readyQuiz {
             this.updateHeader();
         }
     }
+
 }
 
 export function setupQuestionBoard() {
