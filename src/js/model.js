@@ -144,13 +144,13 @@ export class readyQuiz {
 export function setupQuestionBoard() {
     // display header
     view.setupHeader();
-    data.quizInPlay.updateHeader();
+    data.player1.updateHeader();
     // questions
     view.setupQuestion();
-    data.quizInPlay.updateQuestion();
+    data.player1.updateQuestion();
     // answers
     view.setupAnswers();
-    data.quizInPlay.updateAnswers(); // really this should be on the class and I should make a better function
+    data.player1.updateAnswers(); // really this should be on the class and I should make a better function
     // resetBTN
     view.toggleBtns();
 }

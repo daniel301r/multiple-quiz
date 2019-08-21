@@ -70,17 +70,17 @@ export function displayResult() {
     DOMstrings.resultsPage.style.display = 'block';
     
     let html = `
-            <h1>Your result is: <span class="resultScore">${data.quizInPlay.points}/${data.quizInPlay.totalQuestions}</span></h1>
+            <h1>Your result is: <span class="resultScore">${data.player1.points}/${data.player1.totalQuestions}</span></h1>
             <p>This means that <span class="resultCaption">%comment%</span></p>
     `;
 
-    const comment1 = `${data.newQuiz.name}, you need to hit the books more`;
-    const comment2 = `${data.newQuiz.name}, you are doing ok...`;
-    const comment3 = `${data.newQuiz.name}, you are quite a clever person`;
+    const comment1 = `${data.newQuiz1.name}, you need to hit the books more`;
+    const comment2 = `${data.newQuiz1.name}, you are doing ok...`;
+    const comment3 = `${data.newQuiz1.name}, you are quite a clever person`;
 
-    if (data.quizInPlay.points <= data.quizInPlay.totalQuestions * 0.5) { 
+    if (data.player1.points <= data.player1.totalQuestions * 0.5) { 
         html = html.replace('%comment%', comment1);
-    } else if (data.quizInPlay.points > data.quizInPlay.totalQuestions * 0.5 && data.quizInPlay.points <= data.quizInPlay.totalQuestions * 0.75) {
+    } else if (data.player1.points > data.player1.totalQuestions * 0.5 && data.player1.points <= data.player1.totalQuestions * 0.75) {
         html = html.replace('%comment%', comment2);      
     } else {
         html = html.replace('%comment%', comment3); 

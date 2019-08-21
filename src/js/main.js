@@ -43,8 +43,8 @@ const playQuiz = async (e) => {
         await data.newQuiz.getQuiz();
         view.clearLoader();
     }
-    data.quizInPlay = new readyQuiz(data.newQuiz.results, data.newQuiz.amount);
-    data.quizInPlay.setQuestion();
+    data.player1 = new readyQuiz(data.newQuiz.results, data.newQuiz.amount);
+    data.player1.setQuestion();
     model.setupQuestionBoard();
 }
 
@@ -59,10 +59,10 @@ DOMstrings.container.addEventListener('click', function(e){
 
 function selectAnswer(e) {
     // check to see if the answer matches the correct one
-    if (e.target.id === data.quizInPlay.correctAnswer){
-        data.quizInPlay.points++
+    if (e.target.id === data.player1.correctAnswer){
+        data.player1.points++
     } 
-    data.quizInPlay.nextQuestion();
+    data.player1.nextQuestion();
 }
 
 DOMstrings.container.addEventListener('click', function(e){
@@ -74,17 +74,17 @@ DOMstrings.container.addEventListener('click', function(e){
 
 
 function resetQuiz() {
-    if (data.quizInPlay.stage === 'result') {
+    if (data.player1.stage === 'result') {
         DOMstrings.resultsPage.style.display = 'none';
         view.clearHTML('.answerOptions');
-        data.quizInPlay.setQuestion();
+        data.player1.setQuestion();
         model.setupQuestionBoard();
     } else {
         view.clearHTML('.answerOptions');
-        data.quizInPlay.setQuestion();
-        data.quizInPlay.updateHeader();
-        data.quizInPlay.updateQuestion();
-        data.quizInPlay.updateAnswers();
+        data.player1.setQuestion();
+        data.player1.updateHeader();
+        data.player1.updateQuestion();
+        data.player1.updateAnswers();
     }
 }
 document.body.addEventListener('click', function(e){
