@@ -3,7 +3,6 @@ import { DOMstrings } from './view';
 import * as view from './view';
 
 
-
 export const getUserInput = () => {
     // as the categories are identified using a number, the id in the object array in view.js, I need to get the 
     // value of the category the user enters in the input form and then find the name of the category in the list 
@@ -70,9 +69,10 @@ export class createQuiz {
 }
 
 export class readyQuiz {
-    constructor(questions, totalQuestions) {
+    constructor(questions, totalQuestions, name) {
         this.questions = questions;
         this.totalQuestions = totalQuestions; // use this to show the top score as well
+        this.name = name;
     }
     // 1. get data from state
     setQuestion() {
@@ -103,7 +103,8 @@ export class readyQuiz {
         // update question count
         DOMstrings.questionNumber.innerHTML = `${this.questionNumber + 1}/${this.totalQuestions}`;
         // update name (if needed)
-        DOMstrings.name.innerHTML = data.newQuiz.name;
+            // change it to 
+        DOMstrings.name.innerHTML = this.name;
         // update score
         DOMstrings.displayScore.innerHTML = `${this.points}/${this.totalQuestions}`;
     }
@@ -138,21 +139,35 @@ export class readyQuiz {
             this.updateHeader();
         }
     }
-
 }
 
-export function setupQuestionBoard() {
-    // display header
-    view.setupHeader();
-    data.player1.updateHeader();
-    // questions
-    view.setupQuestion();
-    data.player1.updateQuestion();
-    // answers
-    view.setupAnswers();
-    data.player1.updateAnswers(); // really this should be on the class and I should make a better function
-    // resetBTN
-    view.toggleBtns();
+export function setupQuestionBoard(player) {
+    if(player === 1){                
+        // display header
+        view.setupHeader();
+        data.player1.updateHeader();
+        // questions
+        view.setupQuestion();
+        data.player1.updateQuestion();
+        // answers
+        view.setupAnswers();
+        data.player1.updateAnswers(); // really this should be on the class and I should make a better function
+        // resetBTN
+        view.toggleBtns();
+    } else {        
+        // display header
+        view.setupHeader();
+        data.player2.updateHeader();
+        // questions
+        view.setupQuestion();
+        data.player2.updateQuestion();
+        // answers
+        view.setupAnswers();
+        data.player2.updateAnswers(); // really this should be on the class and I should make a better function
+        // resetBTN
+        view.toggleBtns();
+    }
+
 }
 
 

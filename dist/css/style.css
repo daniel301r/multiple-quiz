@@ -46,7 +46,7 @@ body {
 }
 
 .inputForm {
-    display: flex;
+    display: none;
     flex-direction: column;
     padding: 1rem;
 }
@@ -91,7 +91,7 @@ select {
     text-align-last: center;
 }
 
-.submitName {
+.submitQuiz {
     width: 40%;
     align-self: center;
     padding: 0.4rem;
@@ -106,8 +106,8 @@ select {
         transform 150ms ease;
 }
 
-.submitName:hover,
-.submitName:focus {
+.submitQuiz:hover,
+.submitQuiz:focus {
     background: blue;
     color: cornsilk;
 }
@@ -225,6 +225,12 @@ p {
         transform: rotate(360deg);
     }
 }
+
+/* two player section */
+
+/* .playerPage {
+    display: flex;
+} */
 
 /* .twoPlayerForm {
     display: none;
